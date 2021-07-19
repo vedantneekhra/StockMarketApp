@@ -31,28 +31,4 @@ public class Base {
         return dataService.getAllCurrentStockPrice();
     }
 
-//    public long getTradeVolumeByCompanyCodeAndTimeInterval(String code, Timestamp startTime, Timestamp endTime){
-//        return 0;
-//    }
-//
-//    public boolean buyStock(String companyCode, long quantity){
-//
-//        return false;
-//    }
-//
-//    public long buyStockAtfixedPrice(String companyCode, long quantity, float price){
-//
-//        return 0;
-//    }
-//
-//    public boolean sellStock(String companyCode, long quantity){
-//
-//        return false;
-//    }
-//
-//    public boolean sellStockAtFixedPrice(String companyCode, long quantity, float price){
-//
-//        return false;
-//    }
-
 }
