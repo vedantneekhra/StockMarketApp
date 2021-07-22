@@ -10,7 +10,7 @@ public class StockPriceDTO {
     private int id;
     private String companyCode;
     private int companyId;
-    private Timestamp record_time;
+    private Timestamp recordTime;
     private double price;
 
 }

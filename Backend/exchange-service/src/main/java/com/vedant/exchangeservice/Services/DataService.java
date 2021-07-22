@@ -1,6 +1,8 @@
 package com.vedant.exchangeservice.Services;
 
+import com.vedant.exchangeservice.DTO.StockPriceDTO;
 import com.vedant.exchangeservice.Entity.StockPrice;
+import com.vedant.exchangeservice.Mapper.StockPriceMapper;
 import com.vedant.exchangeservice.Repository.StockPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,17 @@ public class DataService {
         }
 
         return m;
+    }
+
+    public List<StockPriceDTO> getStockPriceByIdAndTimeDuration(int companyId, Timestamp startTime, Timestamp endTime){
+
+        List<StockPriceDTO> stockPriceDTOS = new ArrayList<>();
+        List<StockPrice> stockPriceList = stockPriceRepository.findStockPriceByCompanyIdAndTimeDuration(companyId, startTime, endTime);
+        for(StockPrice stockPrice : stockPriceList){
+            stockPriceDTOS.add(StockPriceMapper.doMap(stockPrice));
+        }
+
+        return stockPriceDTOS;
     }
 
 }
