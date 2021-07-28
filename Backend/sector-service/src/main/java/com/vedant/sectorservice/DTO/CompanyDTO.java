@@ -9,6 +9,7 @@ public class CompanyDTO {
     private int sectorId;
     private int CEOId;
     private int BODId;
+    private int stockExchangeId;
     private String name;
     private Double turnOver;
 

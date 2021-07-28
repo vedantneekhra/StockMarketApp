@@ -47,5 +47,4 @@ public class CompanyService {
         return bySectorIdDTO;
     }
 
-
 }

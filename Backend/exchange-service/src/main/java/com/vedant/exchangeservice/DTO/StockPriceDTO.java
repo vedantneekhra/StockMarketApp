@@ -9,6 +9,7 @@ public class StockPriceDTO {
 
     private int id;
     private String companyCode;
+    private StockExchangeDTO stockExchange;
     private int companyId;
     private Timestamp recordTime;
     private double price;

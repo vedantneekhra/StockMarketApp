@@ -33,13 +33,13 @@ public class Base {
     public List<CompanyDTO> getCompanyBySectorId(@PathVariable("SectorId") int sectorId){
         ServiceInstance serviceInstance = loadBalancer.choose("company-service");
 
-        String baseUrl=serviceInstance.getUri().toString();
-        baseUrl = baseUrl + "/company/companyBySectorId/"+Integer.toString(sectorId);
+        String baseUrl = serviceInstance.getUri().toString();
+        baseUrl = baseUrl + "/company/companyBySectorId/" + Integer.toString(sectorId);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List<CompanyDTO>> response=null;
+        ResponseEntity< List< CompanyDTO > > response=null;
 
-        ParameterizedTypeReference<List<CompanyDTO>> paraRefer = new ParameterizedTypeReference<List<CompanyDTO>>() {
+        ParameterizedTypeReference< List< CompanyDTO > > paraRefer = new ParameterizedTypeReference<List<CompanyDTO>>() {
             @Override
             public Type getType() {
                 return super.getType();

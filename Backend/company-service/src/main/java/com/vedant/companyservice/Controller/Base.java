@@ -18,9 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -47,23 +45,24 @@ public class Base {
     }
 
     @GetMapping("/IPODetails/{Id}")
-    public IPODTO getIPODetails(@PathVariable("Id") int companyId){
+    public List<IPODTO> getIPODetails(@PathVariable("Id") int companyId){
         return ipoService.getIPODetailsById(companyId);
     }
 
-    @GetMapping("/StockPrice/{CompanyId}/{StartTime}/{EndTime}")
-    public List<StockPriceDTO> getStockPrice(@PathVariable("CompanyId") int companyId,
+    @GetMapping("/StockPrice/{StockExchangeId}/{CompanyId}/{StartTime}/{EndTime}")
+    public List<StockPriceDTO> getStockPrice(@PathVariable("StockExchangeId") int stockExchangeId,
+                                             @PathVariable("CompanyId") int companyId,
                                              @PathVariable("StartTime") Timestamp startTime,
                                              @PathVariable("EndTime") Timestamp endTime){
+
         ServiceInstance serviceInstance = loadBalancer.choose("exchange-service");
 
         System.out.println(serviceInstance.getUri());
 
         String baseUrl=serviceInstance.getUri().toString();
-        baseUrl = baseUrl + "/exchange/priceByDuration?CompanyId="+Integer.toString(companyId)+
+        baseUrl = baseUrl + "/exchange/priceByDuration?StockExchangeId=" + Integer.toString(stockExchangeId) +
+                "&CompanyId="+Integer.toString(companyId)+
                 "&StartTime="+startTime.toString()+"&EndTime="+endTime.toString();
-
-//        baseUrl = baseUrl.replace(' ', '%');
 
         System.out.println(baseUrl);
 
@@ -98,4 +97,10 @@ public class Base {
     public List<CompanyDTO> getCompanyBySectorId(@PathVariable("SectorId") int sectorId){
         return companyService.getCompanyBySectorId(sectorId);
     }
+
+    @GetMapping("/companyByExchangeId/{StockExchangeId}")
+    public List<CompanyDTO> getCompanyByStockExchangeId(@PathVariable("StockExchangeId") int stockExchangeId){
+        return ipoService.getCompanyByStockExchangeId(stockExchangeId);
+    }
+
 }

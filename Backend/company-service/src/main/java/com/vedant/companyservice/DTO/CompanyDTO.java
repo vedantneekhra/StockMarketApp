@@ -16,6 +16,7 @@ public class CompanyDTO {
     public CompanyDTO(){
 
     }
+
     public CompanyDTO(CompanyEntity companyEntity){
         this.id = companyEntity.getId();
         this.sectorId = companyEntity.getSectorId();

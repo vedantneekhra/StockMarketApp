@@ -11,7 +11,7 @@ public class IPODTO {
     private int id;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private CompanyEntity companyEntity;
+    private CompanyEntity company;
 
     private double pricePerShare;
     private long totalShares;
@@ -20,7 +20,7 @@ public class IPODTO {
 
     public IPODTO(IPOEntity ipoEntity){
         this.id = ipoEntity.getId();
-        this.companyEntity = ipoEntity.getCompanyEntity();
+        this.company = ipoEntity.getCompany();
         this.openDateTime = ipoEntity.getOpenDateTime();
         this.pricePerShare = ipoEntity.getPricePerShare();
         this.totalShares = ipoEntity.getTotalShares();

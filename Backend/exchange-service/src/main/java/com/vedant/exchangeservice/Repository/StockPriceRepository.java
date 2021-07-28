@@ -12,12 +12,12 @@ import java.util.Optional;
 @Repository
 public interface StockPriceRepository extends JpaRepository<StockPrice, String> {
 
-    public List<StockPrice> findByCompanyCode(String companyCode);
-    public Optional<StockPrice> findByCompanyCodeAndRecordTime(String companyCode, Timestamp time);
+    public List<StockPrice> findByStockExchangeAndCompanyCode(int stockExchange, String companyCode);
+    public Optional<StockPrice> findByStockExchangeAndCompanyCodeAndRecordTime(int stockExchangeId, String companyCode, Timestamp time);
 
-    @Query(value = "SELECT * FROM stock_price WHERE (company_code, record_time) in (SELECT company_code, MAX(record_time) as m_time FROM stock_price GROUP BY company_code)", nativeQuery = true)
-    public List<StockPrice> findAllCurrentStockPrice();
+    @Query(value = "SELECT * FROM stock_price WHERE (company_code, record_time) in (SELECT company_code, MAX(record_time) as m_time FROM stock_price GROUP BY company_code) AND stock_exchange_id = :stockExchangeId", nativeQuery = true)
+    public List<StockPrice> findAllCurrentStockPrice(int stockExchangeId);
 
-    @Query(value = "SELECT * FROM stock_price WHERE company_id = :companyId AND record_time BETWEEN :startTime AND :endTime", nativeQuery = true)
-    public List<StockPrice> findStockPriceByCompanyIdAndTimeDuration(int companyId, Timestamp startTime, Timestamp endTime);
+    @Query(value = "SELECT * FROM stock_price WHERE stock_exchange_id = :stockExchangeId AND company_id = :companyId AND record_time BETWEEN :startTime AND :endTime", nativeQuery = true)
+    public List<StockPrice> findStockPriceByCompanyIdAndTimeDuration(int stockExchangeId, int companyId, Timestamp startTime, Timestamp endTime);
 }

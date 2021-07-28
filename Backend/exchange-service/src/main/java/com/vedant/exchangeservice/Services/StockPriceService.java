@@ -11,13 +11,13 @@ import java.sql.Timestamp;
 import java.util.*;
 
 @Service
-public class DataService {
+public class StockPriceService {
 
     @Autowired
     private StockPriceRepository stockPriceRepository;
 
-    public double getCurrentPriceByCode(String companyCode){
-        List<StockPrice> lst = stockPriceRepository.findByCompanyCode(companyCode);
+    public double getCurrentPriceByCode(int stockExchangeId, String companyCode){
+        List<StockPrice> lst = stockPriceRepository.findByStockExchangeAndCompanyCode(stockExchangeId, companyCode);
         if(lst.isEmpty()){
             throw new NullPointerException("Company not found!");
         }
@@ -29,8 +29,8 @@ public class DataService {
         return max.get().getPrice();
     }
 
-    public double getPriceByCode(String companyCode, Timestamp time){
-        Optional<StockPrice> optional = stockPriceRepository.findByCompanyCodeAndRecordTime(companyCode, time);
+    public double getPriceByStockExchangeAndCode(int stockExchangeId, String companyCode, Timestamp time){
+        Optional<StockPrice> optional = stockPriceRepository.findByStockExchangeAndCompanyCodeAndRecordTime(stockExchangeId, companyCode, time);
         if(optional.isEmpty()){
             throw new NullPointerException("Stock price not found");
         }
@@ -38,10 +38,9 @@ public class DataService {
         return optional.get().getPrice();
     }
 
-    public Map<String, Double> getAllCurrentStockPrice(){
+    public Map<String, Double> getAllCurrentStockPrice(int stockExchangeId){
         Map<String, Double> m = new HashMap<>();
-        List<StockPrice> currentPrice = stockPriceRepository.findAllCurrentStockPrice();
-        System.out.println(currentPrice.size());
+        List<StockPrice> currentPrice = stockPriceRepository.findAllCurrentStockPrice(stockExchangeId);
 
         for(StockPrice s : currentPrice){
             m.put(s.getCompanyCode(), s.getPrice());
@@ -50,10 +49,10 @@ public class DataService {
         return m;
     }
 
-    public List<StockPriceDTO> getStockPriceByIdAndTimeDuration(int companyId, Timestamp startTime, Timestamp endTime){
+    public List<StockPriceDTO> getStockPriceByStockExchangeIdAndIdAndTimeDuration(int stockExchangeId, int companyId, Timestamp startTime, Timestamp endTime){
 
         List<StockPriceDTO> stockPriceDTOS = new ArrayList<>();
-        List<StockPrice> stockPriceList = stockPriceRepository.findStockPriceByCompanyIdAndTimeDuration(companyId, startTime, endTime);
+        List<StockPrice> stockPriceList = stockPriceRepository.findStockPriceByCompanyIdAndTimeDuration(stockExchangeId, companyId, startTime, endTime);
         for(StockPrice stockPrice : stockPriceList){
             stockPriceDTOS.add(StockPriceMapper.doMap(stockPrice));
         }

@@ -1,0 +1,25 @@
+@import "../colors";
+@import "../fonts";
+
+.formElement {
+  width: 100%;
+}
+
+.button {
+  @extend .formElement;
+  margin-top: 8px;
+}
+
+.success {
+  margin: auto;
+  margin-bottom: 30px;
+  font-size: 1.2 * $font-size-body;
+  width: 800px;
+  text-align: justify;
+  text-align-last: center;
+  line-height: 1.4;
+}
+
+.maincontainer{
+  min-height: 438px;
+}
