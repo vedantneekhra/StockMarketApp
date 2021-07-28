@@ -1,0 +1,25 @@
+.widgetsContainer {
+  display: flex;
+}
+
+
+.viewStock{
+  min-height: 100%;
+}
+
+.table{
+  width: 300px;
+  text-align: left;
+}
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  
+}
+
+.autoCompleteBox {
+  margin-right: 30px;
+  width: 30%;
+}

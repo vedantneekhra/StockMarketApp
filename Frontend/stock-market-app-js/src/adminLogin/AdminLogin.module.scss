@@ -1,0 +1,10 @@
+@import "../colors";
+
+.formElement {
+  width: 100%;
+}
+
+.button {
+  @extend .formElement;
+  margin-top: 8px;
+}

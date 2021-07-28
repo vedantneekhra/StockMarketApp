@@ -14,8 +14,10 @@
 	<version>0.1.0</version>
 	<packaging>pom</packaging>
 
+
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud.version>2020.0.3</spring-cloud.version>
 	</properties>
 
 	<dependencies>
@@ -57,8 +59,23 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+      			<dependency>
+        				<groupId>org.springframework.cloud</groupId>
+        				<artifactId>spring-cloud-dependencies</artifactId>
+        				<version>${spring-cloud.version}</version>
+        				<type>pom</type>
+       	 			<scope>import</scope>
+      			</dependency>
+    		</dependencies>
+  	</dependencyManagement>
+
 	<modules>
 		<module>exchange-service</module>
+		<module>company-service</module>
+		<module>eureka-server</module>
+		<module>zuul-service</module>
 	</modules>
 	<build>
 		<plugins>

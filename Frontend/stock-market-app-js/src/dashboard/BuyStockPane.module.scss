@@ -1,0 +1,36 @@
+@import "../fonts";
+
+.cardContainer {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.inputCard {
+  min-width: 400px;
+}
+
+.tickerInputCard {
+  @extend .inputCard;
+  margin-right: 20px;
+}
+
+.amountInputCard {
+  @extend .inputCard;
+}
+
+.amountLabel {
+  padding-top: 5px;
+}
+
+.currentBalanceLabel {
+  padding-bottom: 20px;
+}
+
+.buttonBuy {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.maincontainer{
+  min-height: 500px;
+}

@@ -1,0 +1,30 @@
+@import "../fonts";
+@import "../colors";
+
+.autoCompleteBox {
+  margin-right: 30px;
+  width: 30%;
+}
+  
+  .price {
+    margin: auto;
+    margin-bottom: 30px;
+    font-size: 1.2 * $font-size-body;
+    width: 800px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  
+}
+
+
+.button {
+  width: 100%;
+  color: $color-primary-dark;
+  // margin-: 8px;
+}
